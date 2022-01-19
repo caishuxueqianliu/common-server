@@ -6,7 +6,7 @@
     "start": "ts-node ./bin/www",
     "dev": "nodemon -e ts --exec ts-node app.ts",
     "build": "tsc",
-    "server": "node ./dist/bin/www"
+    "server": "ts-node app.ts"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
