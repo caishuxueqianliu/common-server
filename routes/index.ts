@@ -10,7 +10,7 @@ router.get('/', function (req: Request, res: Response, next: NextFunction) {
 
 router.get('/readfile', async (req: Request, res: Response, next: NextFunction) => {
     const data = await readFileContent('./assets/md/resume.md')
-    res.send(data)
+    res.send({data})
 });
 
 module.exports = router;
