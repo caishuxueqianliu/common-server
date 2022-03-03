@@ -3,7 +3,7 @@ import express from 'express';
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const fs = require('fs')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -46,8 +46,32 @@ app.use('/users', usersRouter);
 //   res.render('error');
 // });
 
-app.listen('4000',()=>{
-  console.log(4000)
-})
+app.use('/images/', express.static(path.join(__dirname, './images/')));
+app.use("/assets/", express.static(path.join(__dirname, './assets/')));
+app.use(require('./routes/index'));
+
+// require('./mysql/mysql.ts').init()
+
+var http = require('http');
+var https = require('https');
+var privateKey = fs.readFileSync('./xuegaogamekey/privatekey.pem', 'utf8')
+var certificate = fs.readFileSync('./xuegaogamekey/certificate.pem', 'utf8')
+var credentials = {
+  key: privateKey,
+  cert: certificate
+};
+
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
+var PORT = 8081;
+var SSLPORT = 8082;
+
+
+httpServer.listen(PORT, function() {
+  console.log('HTTP Server is running on: http://localhost:%s', PORT);
+});
+httpsServer.listen(SSLPORT, function() {
+  console.log('HTTPS Server is running on: https://localhost:%s', SSLPORT);
+});
 
 module.exports = app;
