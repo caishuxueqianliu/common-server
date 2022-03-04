@@ -64,7 +64,7 @@ app.use(require('./routes/index'));
 
 // var httpServer = http.createServer(app);
 // var httpsServer = https.createServer(credentials, app);
-var PORT = 8000;
+var PORT = 4001;
 // var SSLPORT = 8082;
 
 
