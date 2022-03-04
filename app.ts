@@ -6,7 +6,7 @@ var logger = require('morgan');
 const fs = require('fs')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var uploadRouter = require('./routes/upload');
 const app: express.Application = express();
 //设置跨域访问
 app.all('*', function (req, res, next) {
@@ -29,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/upload', uploadRouter);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
@@ -52,26 +53,26 @@ app.use(require('./routes/index'));
 
 // require('./mysql/mysql.ts').init()
 
-var http = require('http');
-var https = require('https');
-var privateKey = fs.readFileSync('./xuegaogamekey/privatekey.pem', 'utf8')
-var certificate = fs.readFileSync('./xuegaogamekey/certificate.pem', 'utf8')
-var credentials = {
-  key: privateKey,
-  cert: certificate
-};
+// var http = require('http');
+// var https = require('https');
+// var privateKey = fs.readFileSync('./xuegaogamekey/privatekey.pem', 'utf8')
+// var certificate = fs.readFileSync('./xuegaogamekey/certificate.pem', 'utf8')
+// var credentials = {
+//   key: privateKey,
+//   cert: certificate
+// };
 
-var httpServer = http.createServer(app);
-var httpsServer = https.createServer(credentials, app);
-var PORT = 8081;
-var SSLPORT = 8082;
+// var httpServer = http.createServer(app);
+// var httpsServer = https.createServer(credentials, app);
+var PORT = 8000;
+// var SSLPORT = 8082;
 
 
-httpServer.listen(PORT, function() {
+app.listen(PORT, function() {
   console.log('HTTP Server is running on: http://localhost:%s', PORT);
 });
-httpsServer.listen(SSLPORT, function() {
-  console.log('HTTPS Server is running on: https://localhost:%s', SSLPORT);
-});
+// httpsServer.listen(SSLPORT, function() {
+//   console.log('HTTPS Server is running on: https://localhost:%s', SSLPORT);
+// });
 
 module.exports = app;
