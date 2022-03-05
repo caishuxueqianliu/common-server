@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/common', indexRouter);
 // app.use('/users', usersRouter);
 // app.use('/upload', uploadRouter);
 
@@ -49,7 +49,7 @@ app.use('/', indexRouter);
 
 app.use('/images/', express.static(path.join(__dirname, './images/')));
 app.use("/assets/", express.static(path.join(__dirname, './assets/')));
-app.use(require('./routes/index'));
+
 
 // require('./mysql/mysql.ts').init()
 
