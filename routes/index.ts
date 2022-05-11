@@ -5,7 +5,9 @@ app.use(cookieParser());
 app.use('/upload/', require('./upload'));
 
 
-
+app.use('/project/', require('./project'));
+// app.use('/ws/', require('./ws'));
+//
 
 
 module.exports = app

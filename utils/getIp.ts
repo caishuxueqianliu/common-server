@@ -22,14 +22,13 @@ function getIPAdress() {
 /**
  * 获取用户ip
  */
-function getClientIp(req) {
+function getClientIp(req:any) {
     try{
         return req.headers['x-wq-realip'] ||
             req.connection.remoteAddress ||
             req.socket.remoteAddress ||
             req.connection.socket.remoteAddress;
     }catch(e){
-        logger.info("getClientIp error");
         return "";
     }
 }
